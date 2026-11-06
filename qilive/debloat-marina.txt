@@ -1,0 +1,38 @@
+# Qilive SMART TV (Expressluck, device "marina", MediaTek m7332), Android TV 11, build RTM6.230109.230
+# Monet (com.klevico.monet) désinstallé. Launcher : cleanyourtv, dock SHOW+ TIVI, ONYX, SmartTube, Sound TV, Spotify.
+# Debloat fait le 2026-11-06 avec `pm disable-user --user 0` (rien n'est désinstallé).
+# Annuler : ./restaurer.sh <ip-de-la-tele>   (ou `adb shell pm enable --user 0 <paquet>` pour un seul)
+#
+# A NE JAMAIS DESACTIVER sur ce modèle :
+#   com.mediatek.wwtv.tvcenter      reçoit KEYCODE_TV_INPUT : désactivé, la touche Source ne fait plus rien
+#   com.expressluck.LiveTV.overlay  overlay de l'appli TV
+#   com.mediatek.hotkey.dispatcher  reçoit Paramètres, Zoom et d'autres touches globales
+#   com.mediatek.tvinput, com.mediatek.tv.service, com.cvte.tv.at
+# Ne pas OUVRIR non plus les applis usine : com.homwee.factory, com.expressluck.facmenu, mediatek.factorymenu.ui,
+#   com.at.factory.*, com.express.at.factory.*, com.express.fac.test.
+
+# Lot 1 : streaming et services Google non utilisés
+com.netflix.ninja
+com.amazon.amazonvideo.livingroom
+com.google.android.youtube.tv
+com.google.android.youtube.tvmusic
+com.google.android.play.games
+com.google.android.feedback
+
+# Lot 2 : Assistant Google (Chromecast com.google.android.apps.mediashell gardé)
+com.google.android.katniss
+com.google.android.tv.assistant
+
+# Lot 3 : préinstallés inutiles
+fusion.android.tv.demo                      # "StoreMode", mode démo magasin
+com.google.android.apps.nbu.smartconnect.tv # "Data Saver"
+android.autoinstalls.config.google.gtvpai   # installations automatiques des partenaires
+com.android.printspooler
+
+# Lot 4 : accueil Google remplacé par le launcher cleanyourtv (com.gathin.tvhome)
+# setupwraith supprime les Wi-Fi enregistrés pendant la 1re configuration ("Marseille3" ici) : les re-saisir.
+# Pour revenir à l'accueil Google : réactiver ces trois paquets, puis
+#   adb shell cmd package set-home-activity com.google.android.apps.tv.launcherx/.home.HomeActivity
+com.google.android.tungsten.setupwraith
+com.google.android.apps.tv.launcherx
+com.mediatek.android.leanbacklauncher.partnercustomizer
