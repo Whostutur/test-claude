@@ -74,8 +74,8 @@ echo "Entrées TV déclarées : $(grep -c -E 'TvInputInfo|inputId' "$OUT/dumpsys
 
 echo
 echo "=== Réglages qui ressemblent à la LED de veille ==="
-grep -i -h -E 'led|indicator|standby.?light|power.?light|breath' "$OUT"/settings-*.txt "$OUT/getprop.txt" \
-  | grep -v -i -E 'enabled_accessibility|sled|filled|called|cancel' || echo "(aucun)"
+grep -i -h -E '(^|[_.[])(led|leds|indicator|standby_?light|power_?light|breath|lamp)([]_.=]|$)' \
+  "$OUT"/settings-*.txt "$OUT/getprop.txt" || echo "(aucun)"
 echo "LED dans /sys/class/leds :"; sed 's/^/  /' "$OUT/sys-leds.txt"
 
 echo

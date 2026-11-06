@@ -10,8 +10,8 @@ adb connect "$TV" >/dev/null 2>&1
 adb -s "$TV" get-state >/dev/null 2>&1 || { echo "Pas de connexion ADB à $TV." >&2; exit 1; }
 s() { adb -s "$TV" shell "$@" </dev/null 2>&1 | tr -d '\r'; }
 
-MOTIF='led|indicator|standby_?light|power_?light|breath|lamp'
-EXCLURE='enabled_accessibility|filled|called|cancel|sled'
+MOTIF='(^|[_.[])(led|leds|indicator|standby_?light|power_?light|breath|lamp)([]_.=]|$)'
+EXCLURE='^$'
 trouve=0
 for ns in system secure global; do
   while IFS= read -r ligne; do
